@@ -25,10 +25,10 @@ export default class Main extends Component {
         })
     }
 
-    createTodo = () => {
+    createTodo = (e) => {
+        e.preventDefault();
         this.state.ipValue !== '' || null || undefined ?
             TodoActions.createTodo(this.state.ipValue) : M.toast({ html: toastHTML }, 1000, "red")
-
     }
     reloadTodo = () => {
         TodoActions.reloadTodo(Date.now());
@@ -43,33 +43,35 @@ export default class Main extends Component {
         return (
             <div className="row">
                 <nav>
-                    <div class="nav-wrapper">
-                        <a href="#" class="brand-logo">Logo</a>
+                    <div class="nav-wrapper" style={{ backgroundColor: '#166177' }}>
+                        <a href="#" className="brand-logo" style={{ paddingLeft: '1%' }}>Logo</a>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
                             {/* <li><a href="sass.html">Sass</a></li>
                             <li><a href="badges.html">Components</a></li>
                             <li><a href="collapsible.html">JavaScript</a></li> */}
                         </ul>
                     </div>
-                </nav><br/>
+                </nav><br />
                 <div className="container">
-                    <div className="row">
-                        <div className="col s10">
-                            <form action="" onSubmit={this.createTodo}>
-                                <input type="text" id="inputBox" value={this.state.ipValue} onChange={(e) => this.setState({ ipValue: e.target.value })} />
-                            </form>
-                        </div>
-                        <div className="col s2">
-                            <a className="btn-floating btn-medium waves-effect waves-light white" style={{ marginTop: '4%' }}>
-                                <i className="material-icons" style={{ color: '#161166' }}>keyboard_voice</i>
-                            </a>
-                        </div>
-                        <div className="col s12">
-                            <button className="waves-effect waves-light btn" onClick={this.createTodo}><i className="material-icons left">add</i><b>ADD</b></button>&nbsp;
+                    <div className="card-panel">
+                        <div className="row">
+                            <div className="col s11">
+                                <form onSubmit={this.createTodo}>
+                                    <input type="text" id="inputBox" value={this.state.ipValue} onChange={(e) => this.setState({ ipValue: e.target.value })} />
+                                </form>
+                            </div>
+                            <div className="col s1">
+                                <a className="btn-floating btn-medium waves-effect waves-light white" style={{ marginTop: '4%' }}>
+                                    <i className="material-icons" style={{ color: '#161166' }}>keyboard_voice</i>
+                                </a>
+                            </div>
+                            <div className="col s12">
+                                <button className="waves-effect waves-light btn green" onClick={this.createTodo}><i className="material-icons left">add</i><b>ADD</b></button>&nbsp;
                         <button className="waves-effect waves-light btn grey" onClick={this.reloadTodo}><b>Reload</b></button>
+                            </div>
                         </div>
                     </div>
-                    <br /><br />
+                    <br />
                     <BreadcrumbsTab />
                     {/* <h2 style={{ color: '#166198' }}>Todos</h2> */}
                     <ul>
